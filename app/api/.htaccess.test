@@ -1,0 +1,18 @@
+Options +FollowSymLinks -MultiViews -Indexes
+RewriteEngine On
+RewriteBase /api
+
+#
+# Catch any methods which are not permitted (only GET, POST and DELETE are permitted)
+#
+RewriteCond %{REQUEST_METHOD} !^(GET|POST|DELETE)
+RewriteRule .* - [F]
+
+# Deny access to files and folders
+RewriteRule ^(controllers|f3|lib|vendor)\/|\.(php|pem)$ - [R=403]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [END,QSA]
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]

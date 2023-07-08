@@ -1,0 +1,54 @@
+RewriteEngine on
+RewriteBase /
+
+#
+# remember,
+# all rules are processed, top to bottom, until you flag to skip [S=n] or stop processing [L] following lines
+# all RewriteCond must match for the following RewriteRule to be processed  
+#
+# some useful URLS:
+# https://httpd.apache.org/docs/2.2/rewrite/intro.html
+# https://httpd.apache.org/docs/2.2/rewrite/flags.html
+# https://httpd.apache.org/docs/2.2/mod/mod_rewrite.html
+#
+# Neil Webb, 18 Feb 2016
+#
+
+#
+# Catch any methods which are not permitted (only GET, POST and DELETE are permitted)
+#
+RewriteCond %{REQUEST_METHOD} !^(GET|POST|DELETE)
+RewriteRule .* - [F]
+
+# catch accessing files on webroot
+RewriteRule .txt - [R=403]
+
+#
+# catch connect.ausnetservices.com.au/cts/XXXXXXX as a click thru to the primary domain with a /cts/ subdirectory.
+#
+# e.g.  http://connect.ausnetservices.com.au/cts/EGTSR6532 => http://connect.ausnetservices.com.au/api/cts/EGTSR6532
+#
+RewriteCond %{REQUEST_URI} ^/cts/([a-zA-Z0-9]+)$
+RewriteRule (.*) /api/$1 [R=301,L]    # stop processing following lines
+
+#
+# catch any access to the root dir and redirect to webui
+#
+# e.g.  http://connect.ausnetservices.com.au/  => http://connect.ausnetservices.com.au/webui/
+#
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule (.*) /webui/ [R=301]  # keep processing in case HTTP_HOST transformation also required
+
+#
+# redirection for error pages
+#
+ErrorDocument 400 /errors/400.html
+ErrorDocument 401 /errors/401.html
+ErrorDocument 403 /errors/403.html
+ErrorDocument 404 /errors/404.html
+ErrorDocument 405 /errors/405.html
+ErrorDocument 500 /errors/500.html
+ErrorDocument 503 /errors/503.html
+
+# Disallow directory indexes
+Options -Indexes

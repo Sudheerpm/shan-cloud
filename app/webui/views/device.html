@@ -1,0 +1,80 @@
+  <h1>Your Device</h1>
+
+  <p>Your chosen in home device must be a ZigBee&reg; Certified and ZigBee&reg; Smart Energy Profile (SEP) interoperable in-home device. You also need provide some information about the device you wish to connect to your AusNet Services electricity meter. This information is generally printed on the device or on the documentation provided with your device.</p>
+
+  <ul>
+    <li>MAC Address<small> (this may also be called a EUI-64 or EUID on your device)</small></li>
+    <li>Install Code<small> (this Install Code could be between 20 and 36 alphanumeric characters)</small></li>
+    <li>Device Model</li>
+    <li>Device Manufacturer</li>
+  </ul>
+
+  <br />
+  <form name="form_device" id="form_device" novalidate class="form">
+
+    
+    <div class="row">
+      <i class="fa fa-hdd-o fa-2x col-md-1 col-xs-12 text-center"></i>
+      <div class="col-md-5 col-xs-12">
+      <input 
+           type="text" 
+           name="han_vendor"
+           ng-model="r.request.han_vendor" 
+           ng-pattern="regex_textInput"
+           class="col-md-11 col-xs-11"
+           placeholder="HAN Device Manufacturer" />
+         </div>
+         <div class="col-md-5 col-xs-12">
+      <input 
+           type="text" 
+           name="han_model"
+           ng-model="r.request.han_model" 
+           ng-pattern="regex_textInput"
+           class="col-md-11 col-xs-11"
+           placeholder="HAN Device Model" />
+         </div>
+      
+    </div>
+    <div class="row">
+      <i class="fa fa-code fa-2x col-md-1 col-xs-12 text-center"></i>
+      <div class="col-md-5">
+        <input 
+             type="text" 
+             name="han_mac"
+             ng-model="r.request.han_mac" 
+             ng-pattern="regex_MACAddress"
+             ng-maxlength="23"
+             required
+             class="col-md-11 col-xs-11"
+             placeholder="HAN Device MAC Address *" />
+        <span class="tooltip icn-muted" tooltips tooltip-side="bottom" tooltip-template="{{tooltips.MACAddress}}"><i class="fa fa-info-circle"></i></span>
+      </div>
+    </div>
+
+    <div class="row">
+      <i class="fa fa-qrcode fa-2x col-md-1 col-xs-12 text-center"></i>
+      <div class="col-md-5">
+          <input 
+             type="text"
+             name="han_install_code"
+             ng-model="r.request.han_install_code" 
+             maxlength="42"
+             required
+             class="col-md-11 col-xs-11"
+             ng-class="{'error': CRCValid == 0 }"
+             placeholder="HAN Device Install Code *" />
+          <span class="tooltip icn-muted" tooltips tooltip-side="bottom" tooltip-template="{{tooltips.InstallCode}}"><i class="fa fa-info-circle"></i></span>
+        </div>
+    </div>
+
+    <div class="row">
+      <h3><i class="fa fa-info-circle"></i> You will also require access to your device during the connection process. Once your request is ready, we will send you an email to advise you.</h3>
+      <p><small>ZigBee® is a registered trademark of the ZigBee Alliance.</small></p>
+    </div>
+    
+    <div class="row btn-group">
+      <button class="button-round" ui-sref="details"><i class="fa fa-arrow-left"></i>  Previous</button>
+      <button class="button-round" ui-sref="legal" ng-disabled="form_device.$invalid || CRCValid !== 1">Next <i class="fa fa-arrow-right"></i>  </button>
+    </div>
+  </form>
+  <div ng-include="'footer.html'"></div>

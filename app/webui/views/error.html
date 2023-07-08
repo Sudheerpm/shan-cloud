@@ -1,0 +1,12 @@
+  <h1>Something Went Wrong</h1>
+
+  <p>Unfortunately, your request was unable to be sent. Please try again. If the issue perists, please contact AusNet Services Customer Service (1300 360 795), quoting the following: </p>
+
+  <div id="error-box">
+    <h3>Request: <span class="text-muted">{{ err.data }}</span></h3>
+    <h3>Status Code: <span class="text-muted">{{ err.status }}</span></h3>
+    <h3>Error Reason: <span class="text-muted">{{ err.statusText }}</span></h3>
+    <h3>Current Version: <span class="text-muted">{{ err.config.data.version }}</span></h3>
+  </div>
+
+  <div ng-include="'footer.html'"></div>

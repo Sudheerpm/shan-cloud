@@ -1,0 +1,9 @@
+app/bower_components/
+app/node_modules/
+app/ui/
+.tmp
+._*
+.htaccess
+settings.php
+tags.txt
+version.txt

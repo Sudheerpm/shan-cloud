@@ -1,0 +1,14 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+RewriteBase /api
+
+#
+# Catch any methods which are not permitted (only GET, POST and DELETE are permitted)
+#
+RewriteCond %{REQUEST_METHOD} !^(GET|POST|DELETE)
+RewriteRule .* - [F]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule .* index.php [L,QSA]

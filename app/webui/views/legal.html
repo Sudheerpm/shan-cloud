@@ -1,0 +1,73 @@
+<h1> Terms and Conditions</h1>
+
+<div class="row">
+  <h2>Before submitting your request, you must confirm that you have read, understand and accept the terms and conditions for connecting in-home devices to the AusNet Services electricity meter.</h2>
+</div>
+
+<div class="row" id="eula">
+
+ <p>These terms and conditions apply to your request to AusNet Electricity Services Pty Ltd ( also referred to as “AusNet Services”, “we” or “us”) for your electricity meter to be enabled to permit a connection with a ZigBee&reg; SEP-certified in-home device. A reference to “you” or “I” in these terms and conditions is, if you are an individual, a reference to you personally and if you are making an application as authorised representative of a business or other organisation, a reference to that business or organisation, unless the context otherwise requires.</p>
+
+<ol>
+  <li>You confirm that you are the primary electricity account holder for the electricity meters at the address specified in your request and that the information you have provided in your request is accurate.</li>
+
+  <li>You consent to AusNet Electricity Services Pty Ltd and its related bodies corporate and their respective contractors and agents <strong class="text-muted">(AusNet Services Group)</strong> collecting, using and storing your personal information to verify your identity, process and manage your request and otherwise in accordance with the AusNet Services’ privacy policy, collection statement and meter data privacy statement <strong class="text-muted">(Privacy Policy)</strong>. This consent is for the purposes of clause 7of the National Electricity Rules, the Privacy Policy, the Privacy Act 1988 (Cth) and all other purposes.</li>
+
+  <li>You are solely responsible and liable for your in home device, including its selection and the use of your device. We make no representation or warranty regarding the suitability, quality, accuracy or reliability of any device for connection with an AusNet Services electricity meter.</li>
+
+  <li>We will use commercially reasonable efforts to connect your in-home device with the meter once your Request has been verified and validated, but we make no warranty or representation that:
+
+  <ol type='a'>
+    <li>the connection will be successful; or</li>
+    <li>the connection will be reliable, continuous or error-free.</li>
+  </ol></li>
+
+  <li>Once your request has been validated and confirmed you will have 2 weeks within which to connect your device.  If you do not, for any reason, successfully connect your device within that period you will be required to submit a new request.</li>
+
+  <li>We may terminate the connection between your in-home device and the meter in a number of circumstances including where any of the details provided in the original request (such as your name or address) change or you sell, give away, transfer or dispose of the device.  To the extent permitted by law, we have no liability to you for any loss, cost, damage or expenses suffered or incurred by you in connection with our termination of the connection.  In the event that your connection is terminated you may submit a new request.</li>
+
+  <li>You must notify us if you intend move premises or sell, give away, transfer or dispose of your device; and you must terminate the connection between your device and the AusNet Services electricity meter prior to doing so.</li>
+
+  <li>You are solely responsible and liable for the security of any connection between your device and an, and any information or data obtained or transmitted from (including any reproductions) an, AusNet Services electricity meter.</li>
+
+  <li>You should consider whether you wish to delete information or data obtained or transmitted from (including reproductions) an AusNet Services electricity meter contained on a device which you intend to sell, dispose of, give away or otherwise transfer.</li>
+
+  <li>You acknowledge and agree that any use or reliance on any data or information provided in connection with this request, or obtained or transmitted from an AusNet Services electricity meter (including any reproductions) is entirely at your own risk and that AusNet Services Group does not warrant or represent that the data or information will match data or information provided by a retailer or from any other source. You accept these risks and you accept responsibility for any use of, or reliance on, the data or information, and receipt or performance of any related products, services or advice by you or a third party.</li>
+
+  <li>You agree that, to the extent permitted by law, AusNet Services Group does not accept any responsibility or liability for any loss, damage, cost or expense, whether direct or indirect (including but not limited to legal costs and defence of or settlement claims or consequential loss or damage) whatsoever and howsoever caused, whether by negligence or otherwise, which may be suffered or which may arise from or in connection with:
+
+  <ol type='a'>
+    <li>your request, including without limitation, any rejection, closure or termination of your request;</li>
+    <li>your access, use or misuse of any data or information provided on this website or portal;</li>
+    <li>you use or misuse of your in home device or any other software, hardware, equipment, appliances or systems;</li>
+    <li>the connection (or attempted connection) of an in-home device with an AusNet Services meter or any interruption to, or termination of, that connection;  or</li>
+    <li>your, or any other person or devices’, access to, use, misuse or reliance upon any data or information obtained or transmitted from an AusNet Services meter.</li>
+  </ol></li>
+
+  <li>You indemnify AusNet Services Group and hold it harmless against all loss, actions, proceedings, cost and expenses (including legal fees), claims and damages arising from or in connection with:
+
+  <ol type='a'>
+    <li>your request, including without limitation, any rejection, closure or termination of your request;</li>
+    <li>your access, use or misuse  of any data or information provided on this website or portal;</li>
+    <li>you, or any other person or devices’, use, or misuse, of your in home device or any other software, hardware, equipment, appliances or systems;</li>
+    <li>the connection (or attempted connection) of your in-home device with an AusNet Services meter or the termination of that connection;</li>
+    <li>your, or any other person or devices’, access to or reliance upon any information resulting from the connection between an AusNet Services meter and your in-home device;</li>
+  </ol></li>
+
+  <li>You and acknowledge and agree that AusNet Services Group does not represent or warrant that this website or AusNet Services or any information or material contained in, downloaded or accessible from them or any email or other communication provided in connection with your request, is free from computer viruses or any other defect or error which may affect your hardware,  software, systems , appliances or equipment, including (without limitation) your in home device  You are responsible for your own hardware, software, systems, appliances and equipment, including appropriate virus protection.</li>
+
+  <li>ZigBee&reg; is a registered trademark of the ZigBee Alliance.</li>
+
+
+</div>
+
+<input type="checkbox" ng-model="r.request.eula" /> 
+  <span ng-show="!r.request.business_name">I acknowledge and agree that I have read and understood these Terms and Conditions and that I agree to be bound by them.</span>
+  <span ng-show="r.request.business_name">{{r.request.business_name}} acknowledges and agrees that it has read and understood these Terms and Conditions and that it agrees to be bound by them and I, {{r.request.first_name}} {{r.request.last_name}}, warrant and represent that I am duly authorised to make this application and to acknowledge and agree to, these Terms and Conditions on its behalf.</span><br />
+
+<div class="row btn-group">
+  <button class="button-round" ui-sref="device"><i class="fa fa-arrow-left"></i> Previous</button>
+  <button class="button-round" ng-click="submitReg()" ng-disabled="!r.request.eula"><i class="fa fa-send"></i> Submit</button>
+</div>
+
+<div ng-include="'footer.html'"></div>

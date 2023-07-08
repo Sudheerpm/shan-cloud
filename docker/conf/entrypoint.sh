@@ -1,0 +1,68 @@
+#!/bin/bash
+set -e
+
+# equals separated options
+for i in "$@"
+do
+case $i in
+    -e=*|--env=*)
+    ENVIRONMENT="${i#*=}"
+    shift # past argument=value
+    ;;
+    *)
+    # unknown option
+    ;;
+esac
+done
+
+if [ -z "$ENVIRONMENT" ]; then
+  echo "No environment specified. If running via docker, make sure you set -e ENVIRONMENT=dev, test or prod."
+  exit 1
+fi
+
+echo "Running for $ENVIRONMENT environment."
+API_CONFIG_BASE_DIR="/usr/local/apache2/htdocs/api/lib/"
+API_CONFIG_FILE_NAME="settings"
+API_CONFIG_EXTENSION="php"
+API_CONFIG_FILE="$API_CONFIG_BASE_DIR$API_CONFIG_FILE_NAME.$ENVIRONMENT.$API_CONFIG_EXTENSION"
+API_CONFIG_LINK_NAME="$API_CONFIG_BASE_DIR$API_CONFIG_FILE_NAME.$API_CONFIG_EXTENSION"
+echo "Using API settings file $API_CONFIG_FILE by : ln -s $API_CONFIG_FILE $API_CONFIG_LINK_NAME"
+cd $API_CONFIG_BASE_DIR
+rm -f $API_CONFIG_LINK_NAME
+ln -s $API_CONFIG_FILE $API_CONFIG_LINK_NAME
+chown daemon:daemon $API_CONFIG_LINK_NAME
+
+HTTP_CONFIG_BASE_DIR="/usr/local/apache2/conf/"
+HTTP_CONFIG_FILE_NAME="httpd.conf"
+HTTP_CONFIG_FILE="$HTTP_CONFIG_BASE_DIR$HTTP_CONFIG_FILE_NAME.$ENVIRONMENT"
+HTTP_CONFIG_LINK_NAME="$HTTP_CONFIG_BASE_DIR$HTTP_CONFIG_FILE_NAME"
+echo "Using HTTP settings file by : ln -s $HTTP_CONFIG_FILE $HTTP_CONFIG_LINK_NAME"
+cd $HTTP_CONFIG_BASE_DIR
+rm -f $HTTP_CONFIG_LINK_NAME
+ln -s $HTTP_CONFIG_FILE $HTTP_CONFIG_LINK_NAME 
+chown daemon:daemon  $HTTP_CONFIG_LINK_NAME
+
+
+#the htdocs/api/.htaccess file on the other hand..
+API_HTACCESS_BASE_DIR="/usr/local/apache2/htdocs/api/"
+API_HTACCESS_FILE_NAME=".htaccess"
+API_HTACCESS_FILE="$API_HTACCESS_FILE_NAME.$ENVIRONMENT"
+API_ACCESS_LINK_NAME="$API_HTACCESS_BASE_DIR$API_ACCESS_FILE_NAME"
+echo "Using API .htaccess file $API_HTACCESS_FILE by : ln -s $API_HTACCESS_FILE $API_HTACCESS_LINK_NAME"
+cd $API_HTACCESS_BASE_DIR
+rm -f $API_HTACCESS_FILE_NAME
+ln -s $API_HTACCESS_FILE $API_HTACCESS_FILE_NAME
+chown daemon:daemon  $API_HTACCESS_FILE_NAME
+
+HTDOCS_HTACCESS_BASE_DIR="/usr/local/apache2/htdocs/"
+HTDOCS_HTACCESS_FILE_NAME=".htaccess"
+HTDOCS_HTACCESS_FILE="$HTDOCS_HTACCESS_FILE_NAME.$ENVIRONMENT"
+HTDOCS_ACCESS_LINK_NAME="$HTDOCS_HTACCESS_BASE_DIR$HTDOCS_ACCESS_FILE_NAME"
+echo "Using HTDOCS .htaccess file $HTDOCS_HTACCESS_FILE by : ln -s $HTDOCS_HTACCESS_FILE $HTDOCS_HTACCESS_LINK_NAME"
+cd $HTDOCS_HTACCESS_BASE_DIR
+rm -f $HTDOCS_HTACCESS_FILE_NAME
+ln -s $HTDOCS_HTACCESS_FILE $HTDOCS_HTACCESS_FILE_NAME
+chown daemon:daemon  $HTDOCS_HTACCESS_FILE_NAME
+
+ 
+exec "httpd-foreground"

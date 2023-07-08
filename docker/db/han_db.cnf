@@ -1,0 +1,12 @@
+# DB Config to reduce memory footprint
+[mysqld]
+innodb_buffer_pool_chunk_size=32M
+innodb_buffer_pool_size=32M
+innodb_autoextend_increment=8M
+innodb_log_buffer_size=8M
+innodb_purge_threads=2
+innodb_read_io_threads=2
+innodb_write_io_threads=2
+table_definition_cache=400
+table_open_cache=100
+max-connections=100

@@ -1,0 +1,16 @@
+# Ignore DS Store files
+**/.DS_Store
+**/._*
+
+# Ignore dev htaccess files
+**/.htaccess.dev*
+
+# Ignore dev settinhs files
+**/settings.dev-*.php
+
+# Ignore sql folder
+html/api/sql
+
+# Ignore api folder
+html/doc
+html/apidoc.json
