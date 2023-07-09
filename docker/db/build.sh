@@ -13,7 +13,7 @@ APP_NAME="han-cloud-db"
 APP_DIR="$SCRIPT_DIR/../../app"
 
 # docker repo image location
-REPO="$GROUP_NAME/$APP_NAME"
+REPO="registry-1.docker.io/v2/$GROUP_NAME/$APP_NAME"
 
 function show_help {
 cat <<\USAGE
