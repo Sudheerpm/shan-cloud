@@ -11,10 +11,10 @@ DO_NOT_CLEANUP=false
 # Information about the container
 GROUP_NAME="han"
 APP_NAME="han-cloud-ui"
-APP_DIR="registry-1.docker.io/v2/$SCRIPT_DIR/../src"
+APP_DIR="$SCRIPT_DIR/../src"
 
 # docker repo image location
-REPO="$GROUP_NAME/$APP_NAME"
+REPO="registry-1.docker.io/v2/$GROUP_NAME/$APP_NAME"
 
 function show_help {
 cat <<\USAGE
