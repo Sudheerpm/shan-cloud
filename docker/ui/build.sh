@@ -14,7 +14,7 @@ APP_NAME="han-cloud-ui"
 APP_DIR="$SCRIPT_DIR/../src"
 
 # docker repo image location
-REPO="docker.sysdomain.local/$GROUP_NAME/$APP_NAME"
+REPO="$GROUP_NAME/$APP_NAME"
 
 function show_help {
 cat <<\USAGE
